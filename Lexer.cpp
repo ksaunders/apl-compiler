@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Lexer.h"
 
 using Token = Lexer::Token;
@@ -59,4 +61,28 @@ Rune Lexer::advance() {
     r = (r << 6) | (source[cursor++] & 0x3f);
   }
   return r;
+}
+
+std::ostream &operator<<(std::ostream &os, Op op) {
+  switch (op) {
+  case Op::SEMICOLON:
+    os << ";";
+    break;
+  case Op::NEGATIVE:
+    os << "¯";
+    break;
+  case Op::PLUS:
+    os << "+";
+    break;
+  case Op::NUMBER:
+    os << "NUMBER";
+    break;
+  case Op::ERROR:
+    os << "ERROR";
+    break;
+  case Op::Op_EOF:
+    os << "EOF";
+    break;
+  }
+  return os;
 }

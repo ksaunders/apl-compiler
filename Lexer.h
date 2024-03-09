@@ -1,5 +1,6 @@
 #pragma once
 
+#include <ostream>
 #include <string_view>
 
 using Rune = int;
@@ -22,7 +23,8 @@ public:
     int line;
   };
 
-  Lexer(std::string_view file, std::string_view source) : file{file}, source{source} {}
+  Lexer(std::string_view file, std::string_view source)
+      : file{file}, source{source} {}
 
   Token scanToken();
 
@@ -47,3 +49,5 @@ private:
   int cursor = 0;
   int line = 1;
 };
+
+std::ostream &operator<<(std::ostream &os, Lexer::Token::Op op);
